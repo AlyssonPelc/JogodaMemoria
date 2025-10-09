@@ -84,8 +84,19 @@ header{
 .divs{
     display: flex;
     height: 1000px;
+    gap: 100px;
 }
 .ranking{
-    background-color: ccc;
+    background-color: #ccc;
     color: black;
+    min-height: 200px;
+    border-radius: 6px;
+    height: auto;
+}
+.div1ranking{
+    text-align: center;
+}
+.div2ranking{
+    text-align: left;
+    padding-left: 20px;
 }
