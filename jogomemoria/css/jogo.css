@@ -85,3 +85,7 @@ header{
     display: flex;
     height: 1000px;
 }
+.ranking{
+    background-color: ccc;
+    color: black;
+}
