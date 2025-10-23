@@ -5,7 +5,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="../css/jogo.css">
-    <script defer src="../js/jogo.js"></script>
+    <script type="module" defer src="../js/jogo.js"></script>
+    <script type="module" defer src="../js/carta.js"></script>
+    <script type="module" defer src="../js/Jogador.js"></script>
     <title>Jogo da Memória</title>
 </head>
 
@@ -13,23 +15,17 @@
     <main>
         <header>
             <span class="jogador">Nome do Jogador</span>
-            <span class="spanbotaoreiniciar">
-                <button class="botaoreiniciarjogo"> Reiniciar Jogo</button>
+            <span class="spanbotoes">
+                <button class="botaojogo botaoreiniciarjogo"> Reiniciar Jogo</button>
+                <button class="botaojogo botaoranking"> Ranking </button>
             </span>
             <span>Tempo:
                 <span class="timer">00</span>
             </span>
+            
         </header>
         <div class="divs">
             <div class="grid">
-            </div>
-            <div class="ranking">
-                <div class="div1ranking"><h1>RANKING DE TEMPO</h1></div>
-                <div class="div2ranking">
-                    <ul class="listaranking">
-
-                    </ul>
-                </div>
             </div>
         </div>
     </main>

@@ -1,23 +1,30 @@
-const grid = document.querySelector('.grid');
-let primeiraCarta = '';
-let segundaCarta = '';
-const spanJogador = document.querySelector('.jogador');
-const spanTempo = document.querySelector('.timer');
-const botaoreiniciar = document.querySelector('.spanbotaoreiniciar');
+import {Carta} from './Carta.js'
+import {Jogador} from './Jogador.js'
 
+class Jogo{
+    constructor(){
+        this.primeiraCarta = '';
+        this.segundaCarta = '';
+        this.verificarCartas = 
+        this.grid = document.querySelector('.grid');
+        this.spanTempo = document.querySelector('.timer');
+        this.botaoReiniciar = document.querySelector('.spanbotaoreiniciar');
+        this.configurarbotoes();
+        this.reiniciarjogo = reiniciarjogo();
+        this.botaoranking = botaoranking();
+        this.verificarCartas = verificarCartas();
+        this.iniciarTempo = iniciarTempo()
+        this.verificarFimJogo = verificarFimJogo()
+        this.carregarJogo = carregarJogo()
+    }
+}
 
-const cartas = [
-    'uva',
-    'banana',
-    'laranja',
-    'maca',
-    'morango',
-    'melancia',
-    'pera',
-    'mamao'
-];
+function configurarbotoes(){
+    const reiniciarjogo = document.querySelector('.botaoreiniciarjogo').addEventListener('click', reiniciarjogo());
+    const botaoranking = document.querySelector('.botaoranking').addEventListener("click", botaoranking());
+}
 
-const reiniciarjogo = document.querySelector('.botaoreiniciarjogo').addEventListener("click", () =>{
+function reiniciarjogo(){
     const todasascartas = document.querySelectorAll('.cartas');
     todasascartas.forEach(carta => {
         
@@ -26,9 +33,13 @@ const reiniciarjogo = document.querySelector('.botaoreiniciarjogo').addEventList
     });
     ;
     carregarJogo()
-});
+}
+    
+function botaoranking() {
+    window.location = './ranking.html'
+} 
 
-const verificarCartas = () =>{
+function verificarCartas(){
     const primeiraFruta = primeiraCarta.getAttribute('data-fruta');
     const segundaFruta = segundaCarta.getAttribute('data-fruta');
 
@@ -50,14 +61,14 @@ const verificarCartas = () =>{
     }
 }
 
-const iniciarTempo = () =>{
+function iniciarTempo() {
     this.loop = setInterval(() => {
         const tempoAtual = +spanTempo.innerHTML;
         spanTempo.innerHTML = tempoAtual + 1;
     }, 1000)
 }
 
-const verificarFimJogo = () =>{
+function verificarFimJogo() {
     const desabilitarCartas = document.querySelectorAll('.desabilitarCarta');
 
     if(desabilitarCartas.length === cartas.length * 2){
@@ -70,44 +81,9 @@ const verificarFimJogo = () =>{
     }
 }
 
-const criarElemento = (tag, className) => {
-    const elemento = document.createElement(tag);
-    elemento.className = className;
-    return elemento;
-}
-
-const revelarCarta = ({target}) => {
-    if (target.parentNode.className.includes('revelarCarta'))
-        return;
-    if (primeiraCarta === '') {
-        target.parentNode.classList.add('revelarCarta');
-        primeiraCarta = target.parentNode;
-    }
-    else if (segundaCarta === '') {
-        target.parentNode.classList.add('revelarCarta');
-        segundaCarta = target.parentNode;
-        verificarCartas()
-    }
-}
-
-const criarCartas = (fruta) => {
-
-    const cartas = criarElemento('div', 'cartas');
-    const frente = criarElemento('div', 'face frente');
-    const costas = criarElemento('div', 'face costas'); 
-
-    frente.style.backgroundImage = `url('../imagens/${fruta}.jpg')`;
-
-    cartas.appendChild(frente);
-    cartas.appendChild(costas);
-    cartas.addEventListener('click', revelarCarta);
-    cartas.setAttribute('data-fruta', fruta);
-    return cartas;
-}
-
-const carregarJogo = ( ) => {
+function carregarJogo () {
     grid.innerHTML = ''; 
-    spanTempo.innerHTML = '00';
+    spanTempo.innerHTML = '0';
     clearInterval(this.loop);
     primeiraCarta = '';
     segundaCarta = '';
@@ -115,18 +91,15 @@ const carregarJogo = ( ) => {
     const embaralhar = duplicarCartas.sort(() => Math.random() - 0.5);
 
     embaralhar.forEach((fruta) =>{
-        const carta = criarCartas(fruta);
+        const carta = new Carta(fruta)
         grid.appendChild(carta);
     });
-    
+    iniciarTempo();
 
 }
 
 console.log(this);
 window.onload = () =>{
-    spanJogador.innerHTML = localStorage.getItem('jogador')
-
 carregarJogo();
-iniciarTempo();
 }
 
